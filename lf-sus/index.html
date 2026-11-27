@@ -516,7 +516,6 @@ h1,h2,h3,.fh{font-family:var(--fh);margin:0;font-weight:700}
     else { $('logoX').hidden = false; $('logoX').textContent = ini; $('tini').hidden = false; $('tini').textContent = ini; }
     var L = d.productos || []; // (9.46) ya no salen los números de productos, categorías y fotos en la portada
     var c = '', vc = d.vercont !== false;
-    c += '<a class="bt bp" href="#lista">Ver catálogo</a>';
     if (d.wa && vc) c += '<a class="bt wa" target="_blank" rel="noopener" href="https://wa.me/' + esc(d.wa) + '">' + ic('wa') + 'WhatsApp</a>';
     // (9.47) sin botón de «Llamar» (el teléfono sigue en el pie de página)
     if (d.dir && vc) c += '<a class="bt" href="https://maps.google.com/?q=' + encodeURIComponent(d.dir) + '" target="_blank" rel="noopener">' + ic('pin') + 'Cómo llegar</a>';

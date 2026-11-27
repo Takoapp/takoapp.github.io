@@ -261,7 +261,6 @@ h1,h2,h3,.fh{font-family:var(--fh);margin:0;font-weight:700}
 <div class="hrow"><img id="logo" alt="" hidden><div id="logoX" hidden></div><div><h1 id="neg"></h1><div id="sub" hidden></div></div></div>
 <svg id="ado" class="deco" width="400" height="40" viewBox="0 0 358 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M0 20 H140 M218 20 H358"/><path d="M140 20 C150 0 175 0 170 16 C166 28 150 24 156 14"/><path d="M218 20 C208 0 183 0 188 16 C192 28 208 24 202 14"/><circle cx="179" cy="20" r="5"/></svg>
 <p id="desc"></p>
-<div id="datos"></div>
 <div id="cont"></div>
 </div>
 </div></header>
@@ -271,7 +270,6 @@ h1,h2,h3,.fh{font-family:var(--fh);margin:0;font-weight:700}
 <div id="cats"></div>
 </div>
 <main id="lista"></main>
-<section id="pasos"></section>
 </div>
 <footer id="pie"><div class="w"></div></footer>
 <div class="deco" id="fr2"></div>
@@ -516,13 +514,11 @@ h1,h2,h3,.fh{font-family:var(--fh);margin:0;font-weight:700}
     var ini = String(d.negocio || '?').split(/\s+/).map(function (x) { return x.charAt(0); }).join('').slice(0, 2).toUpperCase();
     if (d.logo) { $('logo').src = d.logo; $('logo').hidden = false; $('tlogo').src = d.logo; $('tlogo').hidden = false; }
     else { $('logoX').hidden = false; $('logoX').textContent = ini; $('tini').hidden = false; $('tini').textContent = ini; }
-    var L = d.productos || [], nF = 0;
-    L.forEach(function (p) { nF += fotos(p).length; });
-    $('datos').innerHTML = '<div class="dt"><div><b>' + L.length + '</b><small>productos</small></div></div>' + ((d.cats || []).length ? '<div class="dt"><div><b>' + d.cats.length + '</b><small>categorías</small></div></div>' : '') + (nF ? '<div class="dt"><div><b>' + nF + '</b><small>fotos</small></div></div>' : '');
+    var L = d.productos || []; // (9.46) ya no salen los números de productos, categorías y fotos en la portada
     var c = '', vc = d.vercont !== false;
     c += '<a class="bt bp" href="#lista">Ver catálogo</a>';
     if (d.wa && vc) c += '<a class="bt wa" target="_blank" rel="noopener" href="https://wa.me/' + esc(d.wa) + '">' + ic('wa') + 'WhatsApp</a>';
-    if (d.tel && vc) c += '<a class="bt" href="tel:' + esc(String(d.tel).replace(/[^0-9+]/g, '')) + '">' + ic('tel') + 'Llamar</a>';
+    // (9.47) sin botón de «Llamar» (el teléfono sigue en el pie de página)
     if (d.dir && vc) c += '<a class="bt" href="https://maps.google.com/?q=' + encodeURIComponent(d.dir) + '" target="_blank" rel="noopener">' + ic('pin') + 'Cómo llegar</a>';
     $('cont').innerHTML = c;
     if (t[15] === 'portada') {
@@ -537,10 +533,7 @@ h1,h2,h3,.fh{font-family:var(--fh);margin:0;font-weight:700}
       $('dch').innerHTML = s + '<circle cx="340" cy="62" r="7" fill="#fff4d6"/><circle cx="340" cy="62" r="14" fill="var(--ac)" opacity=".25"/>';
     }
     if ((t[17] || '').indexOf('remaches') >= 0) $('hb').insertAdjacentHTML('afterbegin', ['top:7px;left:7px', 'top:7px;right:7px', 'bottom:7px;left:7px', 'bottom:7px;right:7px'].map(function (x) { return '<i class="rv" style="' + x + '"></i>'; }).join(''));
-    // cómo pedir
-    $('pasos').innerHTML = conPedido()
-      ? [['Escoge', 'Toca un producto para ver sus fotos y detalles.'], ['Agrega', 'Ponlo en tu pedido con la cantidad que necesitas.'], ['Envía', 'Manda tu pedido por WhatsApp y te contestamos.']].map(function (x, i) { return '<div class="ps"><i>' + (i + 1) + '</i><div><b>' + x[0] + '</b><span>' + x[1] + '</span></div></div>'; }).join('')
-      : '';
+    // (9.47) sin los pasos de «cómo pedir»
     // pie
     $('pie').querySelector('.w').innerHTML = '<div class="pn">' + (d.logo ? '<img src="' + esc(d.logo) + '" alt="" style="width:44px;height:44px;border-radius:10px;object-fit:contain;background:#fff">' : '<div id="pini" style="width:44px;height:44px;border-radius:10px;background:var(--ac);color:var(--acx);display:flex;align-items:center;justify-content:center;font:800 16px var(--fh)">' + esc(ini) + '</div>') + '<b>' + esc(d.negocio || '') + '</b></div>' +
       (d.lema ? '<p>' + esc(d.lema) + '</p>' : '') +

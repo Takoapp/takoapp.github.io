@@ -1,0 +1,14 @@
+[
+ {
+  "relation": [
+   "delegate_permission/common.handle_all_urls"
+  ],
+  "target": {
+   "namespace": "android_app",
+   "package_name": "com.lfinoxidables.cotizador",
+   "sha256_cert_fingerprints": [
+    "BF:F6:A8:5C:63:FD:C2:C8:6D:05:B2:08:52:C8:F7:68:32:97:CA:7E:19:4A:FB:B1:9D:EB:46:16:FB:F1:97:EB"
+   ]
+  }
+ }
+]
